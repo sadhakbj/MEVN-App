@@ -4,14 +4,12 @@ module.exports = {
     register(req, res, next) {
         const rules = {
             email: Joi.string().email(),
-            password: Joi.string().regex(
-                new RegExp('^a-zA-Z0-9{8,32}$')
-            )
+            password: Joi.string()
         }
 
-        const { error } = Joi.validate(req.body, rules)
-
-        console.log(error)
+        const {
+            error
+        } = Joi.validate(req.body, rules)
 
         if (error) {
             switch (error.details[0].context.key) {
